@@ -1,14 +1,22 @@
+// src/App.tsx
+
 import React, { useState, useReducer, useRef, useEffect, useCallback, ChangeEvent } from 'react';
-import useLocalStorage from './assets/bookLocalstorage';
+import axios from 'axios';
 import { bookReducer, Book, initialBooks } from './assets/bookReduce';
 import './App.css';
 
-const App: React.FC = () => {
-  const [books, dispatch] = useReducer(bookReducer, [], () => {
-    const storedBooks = JSON.parse(localStorage.getItem('books') || '[]');
-    return storedBooks.length ? storedBooks : initialBooks;
-  });
+const fetchBooks = async (url: string) => {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    return [];
+  }
+};
 
+const App: React.FC = () => {
+  const [books, dispatch] = useReducer(bookReducer, initialBooks);
   const [searchTitle, setSearchTitle] = useState('');
   const [searchAuthor, setSearchAuthor] = useState('');
   const [searchYear, setSearchYear] = useState('');
@@ -16,15 +24,18 @@ const App: React.FC = () => {
   const [editBookId, setEditBookId] = useState<number | null>(null);
   const booksPerPage = 5;
 
-  const [, setLocalBooks] = useLocalStorage<Book[]>('books', books);
-
   const titleRef = useRef<HTMLInputElement>(null);
   const authorRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setLocalBooks(books);
-  }, [books, setLocalBooks]);
+    const loadBooks = async () => {
+      const booksData = await fetchBooks('http://localhost:8000/api/books');
+      dispatch({ type: 'SET_BOOKS', payload: booksData });
+    };
+
+    loadBooks();
+  }, []);
 
   const handleAddOrUpdateBook = () => {
     if (titleRef.current && authorRef.current && yearRef.current) {

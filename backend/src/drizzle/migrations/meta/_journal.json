@@ -15,6 +15,13 @@
       "when": 1717591925825,
       "tag": "0001_adorable_banshee",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1719398640878,
+      "tag": "0002_adorable_bloodstorm",
+      "breakpoints": true
     }
   ]
 }

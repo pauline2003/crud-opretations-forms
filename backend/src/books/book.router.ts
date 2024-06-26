@@ -3,6 +3,8 @@ import { listBooks, getBook, createBook, updateBook, deleteBook } from "./book.c
 import { zValidator } from "@hono/zod-validator";
 import { bookSchema } from "../validators";
 
+
+
 export const bookRouter = new Hono();
 
 // Get all books: /api/books
