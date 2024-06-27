@@ -5,13 +5,41 @@ import axios from 'axios';
 import { bookReducer, Book, initialBooks } from './assets/bookReduce';
 import './App.css';
 
-const fetchBooks = async (url: string) => {
+const API_URL = 'http://localhost:8000/api/books';
+
+const fetchBooks = async () => {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(API_URL);
     return response.data;
   } catch (error) {
     console.error('Error fetching books:', error);
     return [];
+  }
+};
+
+const addBook = async (book: Book) => {
+  try {
+    const response = await axios.post(API_URL, book);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding book:', error);
+  }
+};
+
+const updateBook = async (book: Book) => {
+  try {
+    const response = await axios.put(`${API_URL}/${book.id}`, book);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating book:', error);
+  }
+};
+
+const deleteBook = async (id: number) => {
+  try {
+    await axios.delete(`${API_URL}/${id}`);
+  } catch (error) {
+    console.error('Error deleting book:', error);
   }
 };
 
@@ -30,14 +58,14 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const loadBooks = async () => {
-      const booksData = await fetchBooks('http://localhost:8000/api/books');
+      const booksData = await fetchBooks();
       dispatch({ type: 'SET_BOOKS', payload: booksData });
     };
 
     loadBooks();
   }, []);
 
-  const handleAddOrUpdateBook = () => {
+  const handleAddOrUpdateBook = async () => {
     if (titleRef.current && authorRef.current && yearRef.current) {
       const book: Book = {
         id: editBookId ?? Date.now(),
@@ -47,11 +75,13 @@ const App: React.FC = () => {
       };
 
       if (editBookId === null) {
-        dispatch({ type: 'ADD_BOOK', payload: book });
+        const newBook = await addBook(book);
+        dispatch({ type: 'ADD_BOOK', payload: newBook });
         const lastPage = Math.ceil((books.length + 1) / booksPerPage);
         setCurrentPage(lastPage);
       } else {
-        dispatch({ type: 'UPDATE_BOOK', payload: book });
+        const updatedBook = await updateBook(book);
+        dispatch({ type: 'UPDATE_BOOK', payload: updatedBook });
         setEditBookId(null);
       }
 
@@ -70,7 +100,8 @@ const App: React.FC = () => {
     }
   };
 
-  const handleDeleteBook = (id: number) => {
+  const handleDeleteBook = async (id: number) => {
+    await deleteBook(id);
     dispatch({ type: 'DELETE_BOOK', payload: { id } });
   };
 
@@ -78,7 +109,7 @@ const App: React.FC = () => {
     const { name, value } = e.target;
     if (name === 'title') setSearchTitle(value);
     if (name === 'author') setSearchAuthor(value);
-    if (name === 'year') setSearchYear(value);
+    if (name === 'publicationyear') setSearchYear(value);
   };
 
   const filteredBooks = books.filter(book =>
@@ -99,7 +130,7 @@ const App: React.FC = () => {
       <div>
         <input type="text" placeholder="Title" ref={titleRef} />
         <input type="text" placeholder="Author" ref={authorRef} />
-        <input type="number" placeholder="Publication Year" ref={yearRef} />
+        <input type="number" placeholder="publication_year" ref={yearRef} />
         <button onClick={handleAddOrUpdateBook} className="add-button">
           {editBookId ? 'Update Book' : 'Add Book'}
         </button>
@@ -121,8 +152,8 @@ const App: React.FC = () => {
         />
         <input
           type="number"
-          name="year"
-          placeholder="Search by year"
+          name="publication_year"
+          placeholder="Search by publication_year"
           value={searchYear}
           onChange={handleSearch}
         />
@@ -132,7 +163,7 @@ const App: React.FC = () => {
           <tr>
             <th>Title</th>
             <th>Author</th>
-            <th>Year</th>
+            <th>publication_year</th>
             <th>Actions</th>
           </tr>
         </thead>

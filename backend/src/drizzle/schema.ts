@@ -1,5 +1,6 @@
 
 import { pgTable, serial, text, varchar,integer, primaryKey } from "drizzle-orm/pg-core";
+import { number } from "zod";
 
 // Book table
 export const BooksTable = pgTable("books", {

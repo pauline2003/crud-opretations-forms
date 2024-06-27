@@ -22,13 +22,13 @@ Content-Type: application/json
 {
     "title": "kigogo",
         "author": "Assumpta kesi",
-        "publicationYear": 2001
+        "publication_year": 2001
 }
 
 
 
 ###
-DELETE http://localhost:8000/api/users/"9"
+DELETE http://localhost:8000/api/books/1
 
 
 
