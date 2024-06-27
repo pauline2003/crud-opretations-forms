@@ -17,12 +17,15 @@ importers:
       '@hono/zod-validator':
         specifier: ^0.2.2
         version: 0.2.2(hono@4.4.3)(zod@3.23.8)
+      '@neondatabase/serverless':
+        specifier: ^0.9.4
+        version: 0.9.4
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
       drizzle-orm:
         specifier: ^0.31.1
-        version: 0.31.1(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(pg@8.12.0)
+        version: 0.31.1(@neondatabase/serverless@0.9.4)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(pg@8.12.0)
       hono:
         specifier: ^4.4.2
         version: 4.4.3
@@ -480,6 +483,9 @@ packages:
     peerDependencies:
       hono: '>=3.9.0'
       zod: ^3.19.1
+
+  '@neondatabase/serverless@0.9.4':
+    resolution: {integrity: sha512-D0AXgJh6xkf+XTlsO7iwE2Q1w8981E1cLCPAALMU2YKtkF/1SF6BiAzYARZFYo175ON+b1RNIy9TdSFHm5nteg==}
 
   '@opentelemetry/api@1.8.0':
     resolution: {integrity: sha512-I/s6F7yKUDdtMsoBWXJe8Qz40Tui5vsuKCWJEWVL+5q9sSWRzzx6v2KeNsOBEwd94j0eWkpWCH4yB6rZg9Mf0w==}
@@ -973,6 +979,10 @@ snapshots:
       hono: 4.4.3
       zod: 3.23.8
 
+  '@neondatabase/serverless@0.9.4':
+    dependencies:
+      '@types/pg': 8.11.6
+
   '@opentelemetry/api@1.8.0': {}
 
   '@types/node@20.14.1':
@@ -1003,8 +1013,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.31.1(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(pg@8.12.0):
+  drizzle-orm@0.31.1(@neondatabase/serverless@0.9.4)(@opentelemetry/api@1.8.0)(@types/pg@8.11.6)(pg@8.12.0):
     optionalDependencies:
+      '@neondatabase/serverless': 0.9.4
       '@opentelemetry/api': 1.8.0
       '@types/pg': 8.11.6
       pg: 8.12.0

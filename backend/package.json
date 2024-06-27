@@ -1,17 +1,20 @@
 {
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "gen":"drizzle-kit generate",
-    "migrate" : " tsx src/drizzle/migrate.ts",
-    "studio" : "drizzle-kit studio",
-    "push": " drizzle-kit generate && tsx src/drizzle/migrate.ts"
+  
+    "scripts": {
+      "dev": "tsx watch src/index.ts",
+      "build": "tsc",
+      "start": "node dist/index.js",
+      "gen": "npx drizzle-kit generate",
+      "migrate": " npx drizzle-kit migrate",
+      "studio": "drizzle-kit studio",
+      "push": "npx drizzle-kit push"
+    
   },
   "dependencies": {
     "@hono/node-server": "^1.11.2",
     "@hono/prometheus": "^1.0.1",
     "@hono/zod-validator": "^0.2.2",
+    "@neondatabase/serverless": "^0.9.4",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.1",
     "hono": "^4.4.2",
