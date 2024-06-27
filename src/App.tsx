@@ -43,7 +43,7 @@ const App: React.FC = () => {
         id: editBookId ?? Date.now(),
         title: titleRef.current.value,
         author: authorRef.current.value,
-        year: parseInt(yearRef.current.value),
+        publication_year: parseInt(yearRef.current.value),
       };
 
       if (editBookId === null) {
@@ -66,7 +66,7 @@ const App: React.FC = () => {
     if (titleRef.current && authorRef.current && yearRef.current) {
       titleRef.current.value = book.title;
       authorRef.current.value = book.author;
-      yearRef.current.value = book.year.toString();
+      yearRef.current.value = book.publication_year.toString();
     }
   };
 
@@ -84,7 +84,7 @@ const App: React.FC = () => {
   const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(searchTitle.toLowerCase()) &&
     book.author.toLowerCase().includes(searchAuthor.toLowerCase()) &&
-    (searchYear === '' || book.year === parseInt(searchYear))
+    (searchYear === '' || book.publication_year === parseInt(searchYear))
   );
 
   const indexOfLastBook = currentPage * booksPerPage;
@@ -141,7 +141,7 @@ const App: React.FC = () => {
             <tr key={book.id}>
               <td>{book.title}</td>
               <td>{book.author}</td>
-              <td>{book.year}</td>
+              <td>{book.publication_year}</td>
               <td>
                 <button onClick={() => handleEditBook(book)}>Edit</button>
                 <button onClick={() => handleDeleteBook(book.id)}>Delete</button>

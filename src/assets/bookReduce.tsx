@@ -2,7 +2,7 @@ export interface Book {
   id: number;
   title: string;
   author: string;
-  year: number;
+  publication_year: number;
 }
 
 export const initialBooks: Book[] = [];
