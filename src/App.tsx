@@ -43,7 +43,7 @@ const App: React.FC = () => {
         id: editBookId ?? Date.now(),
         title: titleRef.current.value,
         author: authorRef.current.value,
-        publication_year: parseInt(yearRef.current.value),
+        publication_year: yearRef.current.value,
       };
 
       if (editBookId === null) {
@@ -66,7 +66,7 @@ const App: React.FC = () => {
     if (titleRef.current && authorRef.current && yearRef.current) {
       titleRef.current.value = book.title;
       authorRef.current.value = book.author;
-      yearRef.current.value = book.publication_year.toString();
+      yearRef.current.value = book.publication_year;
     }
   };
 
@@ -84,7 +84,7 @@ const App: React.FC = () => {
   const filteredBooks = books.filter(book =>
     book.title.toLowerCase().includes(searchTitle.toLowerCase()) &&
     book.author.toLowerCase().includes(searchAuthor.toLowerCase()) &&
-    (searchYear === '' || book.publication_year === parseInt(searchYear))
+    (searchYear === '' || book.publication_year === (searchYear))
   );
 
   const indexOfLastBook = currentPage * booksPerPage;

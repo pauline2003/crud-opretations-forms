@@ -1,11 +1,12 @@
-import { pgTable, serial, text, integer, primaryKey } from "drizzle-orm/pg-core";
+
+import { pgTable, serial, text, varchar,integer, primaryKey } from "drizzle-orm/pg-core";
 
 // Book table
 export const BooksTable = pgTable("books", {
     id: serial("id").primaryKey(),
     title: text("title"),
     author: text("author"),
-    publicationYear: integer("publication_year"),
+    publicationYear: varchar("publication_year"),
 });
 
 // Types

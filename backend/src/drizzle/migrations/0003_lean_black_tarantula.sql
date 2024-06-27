@@ -1,0 +1,1 @@
+ALTER TABLE "books" ALTER COLUMN "publication_year" SET DATA TYPE varchar;
