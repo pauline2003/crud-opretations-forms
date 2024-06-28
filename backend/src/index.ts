@@ -38,7 +38,7 @@ app.use(cors({
 }));
 
 // default route
-app.get('/ok', (c) => {
+app.get("/" ,(c) => {
   return c.text('The server is running!');
 });
 app.get('/timeout', async (c) => {
