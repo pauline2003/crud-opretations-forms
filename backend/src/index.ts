@@ -13,7 +13,7 @@ import { cors } from 'hono/cors';
 
 import { bookRouter } from './books/book.router';
 
-const app = new Hono().basePath('/api');
+const app = new Hono().basePath('/');
 
 const customTimeoutException = () =>
   new HTTPException(408, {

@@ -1,22 +1,22 @@
 
-GET http://localhost:8000/api/ok/
+GET http://localhost:8000/ok/
 
 ###
-GET http://localhost:8000/api/books
+GET http://localhost:8000/books
 
 
-
-###
-
-GET http://localhost:8000/api/metrics
 
 ###
 
-GET http://localhost:8000/api/books
+GET http://localhost:8000/metrics
 
 ###
 
-POST http://localhost:8000/api/books
+GET http://localhost:8000/books
+
+###
+
+POST http://localhost:8000/books
 Content-Type: application/json
 
 {
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:8000/api/books/1
+DELETE http://localhost:8000/books/1
 
 
 
