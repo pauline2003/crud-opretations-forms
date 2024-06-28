@@ -5,7 +5,7 @@ import axios from 'axios';
 import { bookReducer, Book, initialBooks } from './assets/bookReduce';
 import './App.css';
 
-const API_URL = 'http://localhost:8000/api/books';
+const API_URL = 'http://localhost:8000/books';
 
 const fetchBooks = async () => {
   try {

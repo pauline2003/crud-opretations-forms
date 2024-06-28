@@ -20,9 +20,9 @@ POST http://localhost:8000/books
 Content-Type: application/json
 
 {
-    "title": "kigogo",
+    "title": "tumbolisiloshiba",
         "author": "Assumpta kesi",
-        "publication_year": 2001
+        "publicationYear": 2001
 }
 
 
